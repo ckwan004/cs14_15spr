@@ -1,8 +1,24 @@
+//
+//  MyList.cpp
+//  thing
+//
+//  Created by Charles Kwang on 4/12/15.
+//  Copyright (c) 2015 Charles Kwang. All rights reserved.
+//
+
 #include "MyList.h"
 
-MyList::MyList()
+MyList::MyList() : head(NULL)
 {
     
+}
+
+void MyList::display()
+{
+    Node * tempNode = NULL;
+    for(tempNode = head; tempNode != head->pred; tempNode = tempNode->next)
+        std::cout << tempNode->data;
+    std::cout << tempNode->data;
 }
 
 MyList::MyList(const MyList& str)
@@ -37,20 +53,8 @@ MyList::MyList(const char* str)
 
 MyList::~MyList()
 {
-    if(head->next == head)
-    {
-        delete head;
-    }
-    else
-    {
-        Node * tempNode = head->next;
-        for(int i=0;i < size();++i)
-        {
-            delete head;
-            head = tempNode;
-            tempNode = tempNode->next;
-        }
-    }
+    while(size() != 0)
+        pop_back();
 }
 
 void MyList::push_front(char value)
@@ -306,7 +310,7 @@ MyList& MyList::operator=(const MyList& str)
 {
     Node * tempNode = str.head;
     
-    for(int i=0; i< str.size(); ++i)
+    for(int i=0; i < str.size(); ++i)
     {
         push_back(tempNode->data);
         tempNode = tempNode->next;
@@ -320,12 +324,12 @@ char& MyList::operator[](const int i)
     if(i >= size())
     {
         cout << "Error position is too big.\n";
-        return nullChar;
+        return failChar;
     }
     else if(i < 0)
     {
         cout << "Error position is negative.\n";
-        return nullChar;
+        return failChar;
     }
     else
     {
@@ -339,6 +343,8 @@ char& MyList::operator[](const int i)
 
 MyList& MyList::operator+(const MyList& str)
 {
+    cout << "You are running operator + which has a memory leak.\n";
+    
     MyList * tempList = new MyList();
     Node * tempHead2 = head;
     

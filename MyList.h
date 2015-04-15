@@ -8,9 +8,9 @@ using namespace std;
 struct Node
 {
 public:
-    char data;
-    Node * next;
-    Node * pred;
+    char data = 0;
+    Node * next = NULL;
+    Node * pred = NULL;
     Node() : data(0) , next(0), pred(0) {}
     Node(char x) : data(x), next(this), pred(this) {}
 };
@@ -18,6 +18,8 @@ public:
 class MyList
 {
 public:
+    char failChar = 0;
+    
     MyList();
     MyList(const MyList& str);
     MyList(const string& str);
@@ -36,19 +38,13 @@ public:
     void print() const;
     int find(char value) const;
     int find(MyList& query_str) const;
-    void display()
-    {
-        MyList thing = MyList(*this);
-        for(int i=0;i < size();i++)
-            cout << thing[i];
-    }
+    void display();
     
     MyList& operator=(const MyList& str);
     char& operator[](const int i);
     MyList& operator+(const MyList& str);
     
     Node * head = NULL;
-    char nullChar = '\0';
     int num = 0;
 };
 #endif
