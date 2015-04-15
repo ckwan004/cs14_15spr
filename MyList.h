@@ -8,11 +8,11 @@ using namespace std;
 struct Node
 {
 public:
-    Node() : data(0) , next(0), pred(0) {}
-    Node(char x) : data(x), next(this), pred(this) {}
+    char data;
     Node * next;
     Node * pred;
-    char data = NULL;
+    Node() : data(0) , next(0), pred(0) {}
+    Node(char x) : data(x), next(this), pred(this) {}
 };
 
 class MyList
@@ -48,6 +48,7 @@ public:
     MyList& operator+(const MyList& str);
     
     Node * head = NULL;
+    char nullChar = '\0';
     int num = 0;
 };
 #endif

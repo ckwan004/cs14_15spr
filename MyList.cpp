@@ -18,7 +18,8 @@ MyList::MyList(const MyList& str)
 MyList::MyList(const string& str)
 {
     const char * thing = str.c_str();
-    for(int i=0;i < str.size(); ++i)
+    int szz = str.size();
+    for(int i=0;i < szz; ++i)
     {
         push_back(thing[i]);
     }
@@ -27,7 +28,8 @@ MyList::MyList(const string& str)
 MyList::MyList(const char* str)
 {
     string x = str;
-    for(int i=0; i < x.size(); ++i)
+    int szz = x.size();
+    for(int i=0; i < szz; ++i)
     {
         push_back(*(str+i));
     }
@@ -302,30 +304,28 @@ int MyList::find(MyList& query_str) const
 
 MyList& MyList::operator=(const MyList& str)
 {
-    MyList thing = MyList();
     Node * tempNode = str.head;
     
     for(int i=0; i< str.size(); ++i)
     {
-        thing.push_back(tempNode->data);
+        push_back(tempNode->data);
         tempNode = tempNode->next;
     }
-    return thing;
+    return *this;
 }
 
 char& MyList::operator[](const int i)
 {
     Node * tempNode = head;
-    char thing = NULL;
     if(i >= size())
     {
         cout << "Error position is too big.\n";
-        return thing;
+        return nullChar;
     }
     else if(i < 0)
     {
         cout << "Error position is negative.\n";
-        return thing;
+        return nullChar;
     }
     else
     {
@@ -333,8 +333,7 @@ char& MyList::operator[](const int i)
         {
             tempNode = tempNode->next;
         }
-        thing = tempNode->data;
-        return thing;
+        return tempNode->data;
     }
 }
 
