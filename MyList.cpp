@@ -343,8 +343,6 @@ char& MyList::operator[](const int i)
 
 MyList& MyList::operator+(const MyList& str)
 {
-    cout << "You are running operator + which has a memory leak.\n";
-    
     MyList * tempList = new MyList();
     Node * tempHead2 = head;
     
